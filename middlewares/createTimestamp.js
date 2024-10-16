@@ -1,5 +1,5 @@
 // local date
-const date = new Date().toString();
+const date = new Date();
 
 // automatically added timestamp to request body (use this when create new model's object)
 function createTimesamp(req, res, next) {

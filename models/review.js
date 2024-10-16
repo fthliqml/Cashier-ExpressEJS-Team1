@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
             comment: DataTypes.TEXT,
         },
         {
-            timestamps: true,
             sequelize,
             modelName: "Review",
         }

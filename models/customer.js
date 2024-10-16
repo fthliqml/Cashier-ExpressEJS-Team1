@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            // Relasi Customer -> Order (One-to-Many)
+            Customer.hasMany(models.Order, { foreignKey: "customer_id" });
         }
     }
     Customer.init(
@@ -19,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
             address: DataTypes.TEXT,
         },
         {
-            timestamps: true,
             sequelize,
             modelName: "Customer",
         }

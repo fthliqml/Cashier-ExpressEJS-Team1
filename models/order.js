@@ -8,7 +8,11 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            // define association here
+            // Relasi Order -> Customer (Many-to-One)
+            Order.belongsTo(models.Customer, { foreignKey: "customer_id" });
+
+            // Relasi Order -> Product (Many-to-One)
+            Order.belongsTo(models.Product, { foreignKey: "product_id" });
         }
     }
     Order.init(
@@ -20,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
             total_price: DataTypes.INTEGER,
         },
         {
-            timestamps: true,
             sequelize,
             modelName: "Order",
         }

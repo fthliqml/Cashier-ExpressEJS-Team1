@@ -1,0 +1,48 @@
+<nav class="navbar navbar-dark navbar-expand-lg bg-black rounded-bottom-5">
+    <div class="container">
+        <div class="navbar-brand d-flex align-items-center">
+            <img src="/assets/logo.png" alt="logo" width="50" height="50" />
+            <p class="my-0 ms-1">Team-1</p>
+        </div>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link <% if  (currentPage == "dashboard") { %>
+                     active
+                    <% } %>" aria-current="page" href="/dashboard">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link<% if  (currentPage == "products") { %>
+                        active
+                       <% } %>" href="/products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link<% if  (currentPage == "customers") { %>
+                        active
+                       <% } %>" href="/customers">Customers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link<% if  (currentPage == "orders") { %>
+                        active
+                       <% } %>" href="/orders">orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link<% if  (currentPage == "reviews") { %>
+                        active
+                       <% } %>" href="/reviews">Reviews</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

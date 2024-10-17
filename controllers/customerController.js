@@ -1,8 +1,12 @@
-function showCustomerPage(req, res) {
+const { Customer } = require("../models");
+
+async function showCustomerPage(req, res) {
   try {
-    res.render("pages/customers", {
+    const customers = await Customer.findAll();
+     res.render("pages/customers", {
+      customers,
       layout: "layouts/main-layout",
-      title: "Customers",
+      title: "Customers Page",
       styleFile: "customers.css",
       scriptFile: "customers.js",
       currentPage: "customers",

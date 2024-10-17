@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% customers.map((customer)=> { %>
+            <tr>
+                <td>
+                    <%= customer.firstName %>
+                </td>
+                <td>
+                    <%= customer.email %>
+                </td>
+                <td>
+                    <%= customer.address %>
+                </td>
+            </tr>
+            <%})%>
+    </tbody>
+
+</table>

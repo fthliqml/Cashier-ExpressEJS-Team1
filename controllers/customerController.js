@@ -41,17 +41,4 @@ async function createCustomerPage(req, res) {
   }
 }
 
-// const createCustomer = async (req, res) => {
-//   try {
-//     const { firstName, lastName, email, address } = req.body;
-//     await Customer.create({ firstName, lastName, email, address });
-//     req.flash("message", "Customer added successfully!");
-//     res.redirect("/customers");
-//   } catch (err) {
-//     console.error(err.message);
-//     req.flash("error", "Failed to add customer");
-//     res.redirect("/customers/create");
-//   }
-// };
-
 module.exports = { showCustomerPage, createCustomerPage };

@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 
 const configureMiddleware = require("./config/middleware");
-const customerRoutes = require("./routes/customerRoute");
 
 const app = express();
 
@@ -26,9 +25,6 @@ app.get("/", (req, res) => {
     });
   }
 });
-
-//ROUTER
-app.use("/customers", customerRoutes)
 
 const PORT = process.env.PORT_NUMBER;
 app.listen(PORT, () => {

@@ -44,7 +44,7 @@
         <td><%= customer.firstName %> <%= customer.lastName %></td>
         <td><%= customer.email %></td>
         <td><%= order.quantity %></td>
-        <td>Rp. <%= (order.quantity * product.price).toLocaleString('id-ID') %></td>
+        <td>Rp. <%= order.total_price.toLocaleString('id-ID') %></td>
         <td><%= product.name %></td>
         <td><%= order.updatedAt.toLocaleString('id-ID') %></td>
         <td>

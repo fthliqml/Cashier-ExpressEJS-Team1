@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       customer_id: DataTypes.INTEGER,
       product_id: DataTypes.INTEGER,
       quantity: DataTypes.INTEGER,
-      order_date: DataTypes.DATEONLY,
       total_price: DataTypes.INTEGER,
     },
     {

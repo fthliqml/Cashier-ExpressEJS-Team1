@@ -1,0 +1,12 @@
+* {
+    font-family: Poppins;
+}
+
+.justified {
+    text-align: justify;
+}
+
+.rounded-table {
+    border-radius: 15px;
+    overflow: hidden;
+}

@@ -1,7 +1,22 @@
-const { Order } = require("../models");
+const { Order, Customer, Product } = require("../models");
 
-function showOrderPage(req, res) {
+async function showOrderPage(req, res) {
   try {
+    const orders = await Order.findAll({
+      include: [
+        {
+          model: Customer,
+          as: "customer",
+          attributes: ["firstName", "lastName", "email"],
+        },
+        {
+          model: Product,
+          as: "product",
+          attributes: ["name", "price"],
+        },
+      ],
+    });
+
     // Rendering file with template engines (ejs)
     res.render("pages/orders", {
       layout: "layouts/main-layout",
@@ -9,6 +24,7 @@ function showOrderPage(req, res) {
       styleFile: "orders/order.css",
       scriptFile: "order.js",
       currentPage: "orders",
+      orders,
     });
   } catch (error) {
     console.error(error);

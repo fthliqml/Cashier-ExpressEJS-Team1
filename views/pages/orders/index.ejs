@@ -13,7 +13,7 @@
     </div>
     <div class="col-4 align-content-center">
         <div class="justify-content-center d-flex">
-            <a href="/orders/add" class="btn btn-dark">
+            <a href="/orders/create" class="btn btn-dark">
                 <img src="assets/fi_plus.png" alt="" width="20px" class="pb-1 me-1" />
                 Tambahkan Data Order
             </a>
@@ -75,9 +75,12 @@
                         <button class="btn btn-warning" id="btnDetail">
                             <i class="fa-regular fa-eye"></i>
                         </button>
-                        <button class="btn btn-outline-danger" id="btnDelete">
-                            <img src="/assets/fi_delete.png" alt="" width="18px" />
-                        </button>
+                        <!-- 10 pada link dibawah adalah id dari order yang nanti diganti order.id  -->
+                        <form action="/orders/delete/10" method="post">
+                            <button class="btn btn-outline-danger" id="btnDelete">
+                                <img src="/assets/fi_delete.png" alt="" width="18px" />
+                            </button>
+                        </form>
                     </div>
                 </td>
             </tr>

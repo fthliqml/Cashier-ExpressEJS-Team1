@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/styles/customer.css" />
+    <!-- Menghubungkan file CSS -->
+  </head>
+  <body>
+    <h1>Hello FSW1 tercinta!</h1>
+    <h6 style="background-color: aqua">
+      <% if (message != "") { %>
+      <div class="alert">Data berhasil <%= message %></div>
+      <% } %>
+    </h6>
+
+    <table>
+      <th>id</th>
+      <th>name</th>
+      <th>age</th>
+      <th>city</th>
+      <th>email</th>
+      <th>createdAt</th>
+      <th>action</th>
+      <% customers.map((customer) => { %>
+      <tr>
+        <td><%= customer.id %></td>
+        <td><%= customer.name %></td>
+        <td><%= customer.age %></td>
+        <td><%= customer.city %></td>
+        <td><%= customer.email %></td>
+        <td><%= customer.createdAt %></td>
+        <td>
+          <a href="/customers/edit/<%= customer.id %>">
+            <button>Edit</button>
+          </a>
+          <form
+            action="/customers/admin/delete/<%= customer.id %>"
+            method="POST"
+          >
+            <button>Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </table>
+    <a href="/customers/create">
+      <button>tambah customer baru</button>
+    </a>
+  </body>
+</html>

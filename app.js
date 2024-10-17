@@ -26,14 +26,7 @@ app.get("/", (req, res) => {
   }
 });
 
-// Middleware untuk mengizinkan parsing data
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-const customerRoutes = require("./routes/customerRoute");
-app.use("/customers", customerRoutes);
-
 const PORT = process.env.PORT_NUMBER;
 app.listen(PORT, () => {
-  console.log(`App running on http://localhost:${3000}`);
+  console.log(`App running on http://localhost:${PORT}`);
 });

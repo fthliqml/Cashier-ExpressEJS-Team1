@@ -37,6 +37,45 @@ async function showOrderPage(req, res) {
   }
 }
 
+async function getDetailOrder(req, res) {
+  try {
+    const id = req.params.id;
+    const order = await Order.findByPk(id, {
+      include: [
+        {
+          model: Customer,
+          as: "customer",
+          attributes: ["firstName", "lastName", "email", "address"],
+        },
+        {
+          model: Product,
+          as: "product",
+          attributes: ["name", "price", "description"],
+        },
+      ],
+    });
+
+    if (!order) {
+      throw new Error("Can't find spesific id");
+    }
+
+    res.status(200).json({
+      status: "Success",
+      message: "Successfully obtained detail data",
+      isSuccess: true,
+      data: order,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: "Failed",
+      message: "Failed to get detail data",
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
+
 async function createPage(req, res) {
   try {
     res.render("pages/orders/create", {
@@ -88,6 +127,7 @@ async function deleteOrder(req, res) {
 
 module.exports = {
   showOrderPage,
+  getDetailOrder,
   createPage,
   deleteOrder,
 };

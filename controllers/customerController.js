@@ -130,10 +130,67 @@ async function updateCustomer(req, res) {
     });
   }
 }
+
+async function deleteCustomer(req, res) {
+  try {
+    const customerId = req.params.id;
+    const customer = await Customer.findByPk(customerId); // Mengambil data pelanggan berdasarkan ID
+
+    if (!customer) {
+      return res.status(404).json({
+        status: "Failed",
+        message: "Customer not found",
+        isSuccess: false,
+      });
+    }
+
+    // Menghapus data pelanggan
+    await customer.destroy();
+
+    res.redirect("/customers");
+  } catch (error) {
+    res.status(500).json({
+      status: "Failed",
+      message: "Failed to delete customer",
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
+async function deleteCustomerPage(req, res) {
+  try {
+    const customerId = req.params.id;
+    const customer = await Customer.findByPk(customerId);
+
+    if (!customer) {
+      return res.status(404).json({
+        status: "Failed",
+        message: "Customer not found",
+        isSuccess: false,
+      });
+    }
+
+    res.render("pages/customers/delete", {
+      layout: "layouts/main-layout",
+      title: "Delete Customer",
+      customer,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: "Failed",
+      message: "Failed to show delete page",
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
 module.exports = {
   showCustomerPage,
   createCustomerPage,
   createCustomer,
   editCustomerPage,
   updateCustomer,
+  deleteCustomer,
+  deleteCustomerPage,
 };

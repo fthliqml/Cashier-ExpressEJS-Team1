@@ -185,6 +185,22 @@ async function deleteCustomerPage(req, res) {
     });
   }
 }
+const searchCustomerById = async (req, res) => {
+  const customerId = req.query.id;
+
+  try {
+    const customer = await Customer.findByPk(customerId);
+    if (!customer) {
+      return res
+        .status(404)
+        .render("customers", { customers: [], message: "Customer not found" });
+    }
+    res.render("customers", { customers: [customer], message: null });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 module.exports = {
   showCustomerPage,
   createCustomerPage,
@@ -193,4 +209,5 @@ module.exports = {
   updateCustomer,
   deleteCustomer,
   deleteCustomerPage,
+  searchCustomerById,
 };

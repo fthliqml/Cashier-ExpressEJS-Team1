@@ -13,6 +13,19 @@
   <body>
     <div class="container mt-5">
       <h2 class="mb-4">Customers List</h2>
+      <form class="form-inline mb-4" action="/customers/search" method="get">
+        <div class="form-group mr-2">
+          <input
+            type="text"
+            class="form-control"
+            name="id"
+            placeholder="Enter Customer ID"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
       <a href="/customers/create" class="btn btn-primary mb-3"
         >Add New Customer</a
       >

@@ -2,7 +2,7 @@ const { Customer } = require("../models");
 
 async function showCustomerPage(req, res) {
   try {
-    const customers = await Customer.findAll();
+    const customers = await Customer.findAll({ order: [['firstName', 'ASC']] });
     res.render("pages/customers/index", {
       customers,
       layout: "layouts/main-layout",
@@ -53,7 +53,7 @@ async function createCustomer(req, res) {
     });
     console.log("New Customer Created:", newCustomer);
 
-    res.redirect("/customers");
+    res.redirect("/customers?message=Customer successfully created!");
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -62,6 +62,7 @@ async function createCustomer(req, res) {
       isSuccess: false,
       error: error.message,
     });
+    res.redirect("/customers?message=Failed to create customer");
   }
 }
 

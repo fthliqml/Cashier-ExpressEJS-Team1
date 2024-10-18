@@ -5,6 +5,17 @@
 
 <div class="container mt-5">
   <h2 class="mb-4">Customers List</h2>
+  <!-- Warning for messages -->
+  <script>
+    // get query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
+
+    // If there is a message, display an alert
+    if (message) {
+      alert(message);
+    }
+  </script>
   <div class="d-flex justify-content-between align-items-center mb-4">
     <a href="/customers/create" class="btn btn-primary">
       <img src="assets/fi_plus.png" class="logo-plus mr-3" alt=""><span>Add New Customer</span></a>

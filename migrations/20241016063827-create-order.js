@@ -26,9 +26,11 @@ module.exports = {
         },
       },
       quantity: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       total_price: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       createdAt: {

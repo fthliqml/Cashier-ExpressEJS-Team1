@@ -40,19 +40,13 @@
             <td><%= customer.createdAt.toISOString().split('T')[0] %></td>
             <td><%= customer.updatedAt.toISOString().split('T')[0] %></td>
             <td>
-              <div class="d-flex justify-content-center">
+              <div class="d-flex justify-content-center gap-2">
                 <a
                   class="btn btn-success"
                   href="/customers/<%= customer.id %>/edit"
                 >
                   <img src="/assets/fi_edit.png" alt="Edit" width="18px" />
                 </a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td colspan="7">
-              <div class="d-flex justify-content-center gap-3">
                 <form
                   action="/customers/delete/<%= customer.id %>"
                   method="post"

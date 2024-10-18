@@ -65,4 +65,75 @@ async function createCustomer(req, res) {
   }
 }
 
-module.exports = { showCustomerPage, createCustomerPage, createCustomer };
+async function editCustomerPage(req, res) {
+  try {
+    const customerId = req.params.id;
+    const customer = await Customer.findByPk(customerId); // Mengambil data pelanggan berdasarkan ID
+
+    if (!customer) {
+      return res.status(404).json({
+        status: "Failed",
+        message: "Customer not found",
+        isSuccess: false,
+      });
+    }
+
+    res.render("pages/customers/edit", {
+      layout: "layouts/main-layout",
+      title: "Edit Customer Page",
+      styleFile: "customers.css",
+      scriptFile: "customers.js",
+      currentPage: "customers",
+      customer: customer, // Mengirim data pelanggan untuk diisi di form
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Failed",
+      message: "Failed to show edit page",
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
+
+// Memproses pembaruan data pelanggan
+async function updateCustomer(req, res) {
+  try {
+    const customerId = req.params.id;
+    const { firstName, lastName, email, address } = req.body;
+
+    const customer = await Customer.findByPk(customerId);
+
+    if (!customer) {
+      return res.status(404).json({
+        status: "Failed",
+        message: "Customer not found",
+        isSuccess: false,
+      });
+    }
+
+    // Memperbarui data pelanggan
+    await customer.update({
+      firstName,
+      lastName,
+      email,
+      address,
+    });
+
+    res.redirect("/customers");
+  } catch (error) {
+    res.status(500).json({
+      status: "Failed",
+      message: "Failed to update customer",
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
+module.exports = {
+  showCustomerPage,
+  createCustomerPage,
+  createCustomer,
+  editCustomerPage,
+  updateCustomer,
+};

@@ -1,0 +1,52 @@
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3>Create New Order</h3>
+                    <form
+                        class="requires-validation"
+                        enctype="application/x-www-form-urlencoded"
+                        method="post"
+                        action="/orders/create"
+                    >
+                        <div class="col-md-12">
+                            <select class="form-select mt-3" required>
+                                <option selected disabled value="">Customer Name</option>
+                                <option value="john">john</option>
+                                <option value="john">john</option>
+                                <option value="john">john</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <select class="form-select mt-3" required>
+                                <option selected disabled value="">Product Name</option>
+                                <option value="Product 1">Product 1</option>
+                                <option value="Product 2">Product 2</option>
+                                <option value="Product 3">Product 3</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="quantity"
+                                placeholder="quantity"
+                                required
+                            />
+                        </div>
+
+                        <div class="form-button mt-3 d-flex justify-content-between">
+                            <a href="/orders" class="btn btn btn-outline-secondary"> Cancel </a>
+                            <button id="submit" type="submit" class="btn btn-primary">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

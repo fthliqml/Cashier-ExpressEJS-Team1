@@ -1,0 +1,111 @@
+<!-- Page Description -->
+<div class="row justify-content-center">
+    <div class="col-8">
+        <h1>Halaman Order</h1>
+        <p class="justified">
+            Halaman ini adalah bagian dari sistem yang digunakan untuk mengelola transaksi pemesanan
+            produk. Pada halaman ini, pengguna dapat melihat daftar pesanan yang telah dilakukan,
+            termasuk detail seperti nomor pesanan, nama pelanggan, produk yang dipesan, jumlah,
+            total harga, dan tanggal transaksi. Halaman ini membantu memfasilitasi proses
+            pengelolaan dan pemantauan pesanan secara efisien, sehingga memudahkan bisnis dalam
+            menjaga alur kerja yang teratur dan memastikan kepuasan pelanggan.
+        </p>
+    </div>
+    <div class="col-4 align-content-center">
+        <div class="justify-content-center d-flex">
+            <a href="/orders/create" class="btn btn-dark">
+                <img src="assets/fi_plus.png" alt="" width="20px" class="pb-1 me-1" />
+                Tambahkan Data Order
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Data Content -->
+<div class="content my-3">
+    <table class="table table-hover table-striped rounded-table">
+        <thead class="table-dark">
+            <tr class="text-center">
+                <th scope="col">Order ID</th>
+                <th scope="col">Customer Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Product</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody class="bg-light text-dark text-center align-middle">
+            <tr>
+                <th scope="row">1</th>
+                <td>John Doe</td>
+                <td>john.doe@example.com</td>
+                <td>2</td>
+                <td>Rp. 20.000</td>
+                <td>Smartphone</td>
+                <td>2024-10-16</td>
+                <td>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a class="btn btn-success" href="/orders/1/edit">
+                            <img src="/assets/fi_edit.png" alt="" width="18px" />
+                        </a>
+                        <button class="btn btn-warning" id="btnDetail">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-danger" id="btnDelete">
+                            <img src="/assets/fi_delete.png" alt="" width="18px" />
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">1</th>
+                <td>John Doe</td>
+                <td>john.doe@example.com</td>
+                <td>2</td>
+                <td>Rp. 20.000</td>
+                <td>Smartphone</td>
+                <td>2024-10-16</td>
+                <td>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a class="btn btn-success" href="/orders/1/edit">
+                            <img src="/assets/fi_edit.png" alt="" width="18px" />
+                        </a>
+                        <button class="btn btn-warning" id="btnDetail">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                        <!-- 10 pada link dibawah adalah id dari order yang nanti diganti order.id  -->
+                        <form action="/orders/delete/10" method="post">
+                            <button class="btn btn-outline-danger" id="btnDelete">
+                                <img src="/assets/fi_delete.png" alt="" width="18px" />
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">1</th>
+                <td>John Doe</td>
+                <td>john.doe@example.com</td>
+                <td>2</td>
+                <td>Rp. 20.000</td>
+                <td>Smartphone</td>
+                <td>2024-10-16</td>
+                <td>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a class="btn btn-success" href="/orders/1/edit">
+                            <img src="/assets/fi_edit.png" alt="" width="18px" />
+                        </a>
+                        <button class="btn btn-warning" id="btnDetail">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                        <button class="btn btn-outline-danger" id="btnDelete">
+                            <img src="/assets/fi_delete.png" alt="" width="18px" />
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

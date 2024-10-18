@@ -11,34 +11,58 @@ async function showCustomerPage(req, res) {
       scriptFile: "customers.js",
       currentPage: "customers",
     });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     res.status(500).json({
       status: "Failed",
       message: "Failed to show page",
       isSuccess: false,
-      error: err.message,
+      error: error.message,
     });
   }
 }
 async function createCustomerPage(req, res) {
   try {
-    res.render("pages/customers/customers", {
+    res.render("pages/customers/create", {
       layout: "layouts/main-layout",
       title: "Customers Create Page",
       styleFile: "customers.css",
       scriptFile: "customers.js",
       currentPage: "customers",
     });
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
     res.status(500).json({
       status: "Failed",
       message: "Failed to create show page",
       isSuccess: false,
-      error: err.message,
+      error: error.message,
     });
   }
 }
 
-module.exports = { showCustomerPage, createCustomerPage };
+async function createCustomer(req, res) {
+  try {
+    console.log("Request Body:", req.body);
+    const { firstName, lastName, email, address } = req.body;
+
+    const newCustomer = await Customer.create({
+      firstName,
+      lastName,
+      email,
+      address,
+    });
+    console.log("New Customer Created:", newCustomer);
+
+    res.redirect("/customers");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: "Failed",
+      message: "Failed to create customer",
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
+
+module.exports = { showCustomerPage, createCustomerPage, createCustomer };

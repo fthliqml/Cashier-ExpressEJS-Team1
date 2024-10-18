@@ -5,6 +5,6 @@ const { customerController } = require("../controllers");
 
 router.get("/customers", customerController.showCustomerPage);
 router.get("/customers/create", customerController.createCustomerPage);
-router.get("/customers", customerController.showCustomerPage);
+router.post("/customers/create",customerController.createCustomer)
 
 module.exports = router;

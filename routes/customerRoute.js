@@ -4,7 +4,7 @@ const router = express.Router();
 const { customerController } = require("../controllers");
 
 router.get("/customers", customerController.showCustomerPage);
-router.get("/customers/search", customerController.searchCustomerById);
+router.get("/customers/search", customerController.searchCustomerPage);
 router.get("/customers/create", customerController.createCustomerPage);
 router.post("/customers/create", customerController.createCustomer);
 router.get("/customers/:id/edit", customerController.editCustomerPage);

@@ -6,7 +6,7 @@ async function showCustomerPage(req, res) {
     res.render("pages/customers/index", {
       customers,
       layout: "layouts/main-layout",
-      title: "Customers Page",
+      title: "Customers List",
       styleFile: "customers.css",
       scriptFile: "customers.js",
       currentPage: "customers",
@@ -68,7 +68,7 @@ async function createCustomer(req, res) {
 async function editCustomerPage(req, res) {
   try {
     const customerId = req.params.id;
-    const customer = await Customer.findByPk(customerId); // Mengambil data pelanggan berdasarkan ID
+    const customer = await Customer.findByPk(customerId);
 
     if (!customer) {
       return res.status(404).json({
@@ -84,7 +84,7 @@ async function editCustomerPage(req, res) {
       styleFile: "customers.css",
       scriptFile: "customers.js",
       currentPage: "customers",
-      customer: customer, // Mengirim data pelanggan untuk diisi di form
+      customer: customer,
     });
   } catch (error) {
     res.status(500).json({
@@ -96,7 +96,6 @@ async function editCustomerPage(req, res) {
   }
 }
 
-// Memproses pembaruan data pelanggan
 async function updateCustomer(req, res) {
   try {
     const customerId = req.params.id;
@@ -112,7 +111,6 @@ async function updateCustomer(req, res) {
       });
     }
 
-    // Memperbarui data pelanggan
     await customer.update({
       firstName,
       lastName,
@@ -134,7 +132,7 @@ async function updateCustomer(req, res) {
 async function deleteCustomer(req, res) {
   try {
     const customerId = req.params.id;
-    const customer = await Customer.findByPk(customerId); // Mengambil data pelanggan berdasarkan ID
+    const customer = await Customer.findByPk(customerId);
 
     if (!customer) {
       return res.status(404).json({
@@ -185,22 +183,38 @@ async function deleteCustomerPage(req, res) {
     });
   }
 }
-const searchCustomerById = async (req, res) => {
+const searchCustomerPage = async (req, res) => {
   const customerId = req.query.id;
 
   try {
     const customer = await Customer.findByPk(customerId);
     if (!customer) {
-      return res
-        .status(404)
-        .render("customers", { customers: [], message: "Customer not found" });
+      return res.status(404).render("pages/customers/search", {
+        layout: "layouts/main-layout",
+        title: "Customer Not Found",
+        customer: null,
+        styleFile: "customers.css",
+        scriptFile: "customers.js",
+        currentPage: "customers",
+        message: "Customer not found!",
+      });
     }
-    res.render("customers", { customers: [customer], message: null });
+
+    res.render("pages/customers/search", {
+      layout: "layouts/main-layout",
+      styleFile: "customers.css",
+      scriptFile: "customers.js",
+      currentPage: "customers",
+      title: "Customer Details",
+      customer,
+      message: null,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 };
+
 module.exports = {
   showCustomerPage,
   createCustomerPage,
@@ -209,5 +223,5 @@ module.exports = {
   updateCustomer,
   deleteCustomer,
   deleteCustomerPage,
-  searchCustomerById,
+  searchCustomerPage,
 };

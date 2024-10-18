@@ -142,7 +142,6 @@ async function deleteCustomer(req, res) {
       });
     }
 
-    // Menghapus data pelanggan
     await customer.destroy();
 
     res.redirect("/customers");
@@ -171,6 +170,9 @@ async function deleteCustomerPage(req, res) {
     res.render("pages/customers/delete", {
       layout: "layouts/main-layout",
       title: "Delete Customer",
+      styleFile: "",
+      scriptFile: "",
+      currentPage: "",
       customer,
     });
   } catch (error) {
@@ -183,9 +185,8 @@ async function deleteCustomerPage(req, res) {
     });
   }
 }
-const searchCustomerPage = async (req, res) => {
+async function searchCustomerPage(req, res) {
   const customerId = req.query.id;
-
   try {
     const customer = await Customer.findByPk(customerId);
     if (!customer) {
@@ -196,7 +197,7 @@ const searchCustomerPage = async (req, res) => {
         styleFile: "customers.css",
         scriptFile: "customers.js",
         currentPage: "customers",
-        message: "Customer not found!",
+        message: "Customer not found",
       });
     }
 
@@ -213,7 +214,7 @@ const searchCustomerPage = async (req, res) => {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
-};
+}
 
 module.exports = {
   showCustomerPage,

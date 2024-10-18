@@ -5,14 +5,18 @@
 
 <div class="container mt-5">
   <h2 class="mb-4">Customers List</h2>
-  <form class="form-inline mb-4" action="/customers/search" method="get">
-    <div class="form-group mr-2">
-      <input type="text" class="form-control" name="id" placeholder="Enter Customer ID" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-  </form>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <a href="/customers/create" class="btn btn-primary">
+      <img src="assets/fi_plus.png" class="logo-plus mr-3" alt=""><span>Add New Customer</span></a>
+    <form class="d-flex align-items-center" action="/customers/search" method="get">
+      <button type="submit" class="btn btn-primary mt-3 py-2 my-2">Search</button>
+      <input type="text" class="form-control mr-2 ml-2" name="id" placeholder="Enter Customer ID" required />
+    </form>
+  </div>
 
-  <a href="/customers/create" class="btn btn-primary mb-3">Add New Customer</a>
+
+
+
   <table class="table table-hover table-striped rounded-table">
     <thead class="table-dark">
       <tr class="text-center">
@@ -55,7 +59,7 @@
               <a class="btn btn-success" href="/customers/<%= customer.id %>/edit">
                 <img src="/assets/fi_edit.png" alt="Edit" width="18px" />
               </a>
-              
+
               <form action="/customers/search" method="get">
                 <input type="hidden" name="id" value="<%= customer.id %>" />
                 <button class="btn btn-warning" id="btnDetail">

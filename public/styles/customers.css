@@ -58,3 +58,9 @@ a:hover {
   color: black;
   border-radius: 15px 15px 0 0;
 }
+
+.logo-plus {
+  color: black !important;
+  width: 10%;
+  height: 12%;
+}

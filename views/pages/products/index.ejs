@@ -1,0 +1,45 @@
+<!-- Page Description -->
+<div class="row justify-content-center">
+  <div class="col-8">
+    <h1>Halaman Product</h1>
+    <p class="justified">
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br />
+      Consequatur voluptas soluta dignissimos praesentium, a perspiciatis <br />
+      eius ullam facilis quae quo! Lorem ipsum dolor sit amet consectetur <br />
+      adipisicing elit. Eos, debitis. Lorem ipsum dolor sit amet.
+    </p>
+  </div>
+  <div class="col-4 align-content-center">
+    <div class="justify-content-center d-flex">
+      <a href="" class="btn btn-dark">
+        <img src="assets/fi_plus.png" alt="" width="20px" class="pb-1 me-1" />
+        Tambahkan Data Product
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive my-3">
+  <table class="table table-hover text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.map((product) => { %>
+      <tr>
+        <th><%= product.id %></th>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td><%= product.stock %></td>
+        <td><%= product.description %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

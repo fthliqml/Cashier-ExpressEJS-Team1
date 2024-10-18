@@ -1,6 +1,6 @@
 <!-- Page Description -->
-<div class="row justify-content-center">
-  <div class="col-8">
+<div class="row justify-content-center ms-4">
+  <div class="col-7">
     <h1>Halaman Order</h1>
     <p class="justified">
       Halaman ini adalah bagian dari sistem yang digunakan untuk mengelola transaksi pemesanan
@@ -11,9 +11,9 @@
       memastikan kepuasan pelanggan.
     </p>
   </div>
-  <div class="col-4 align-content-center">
-    <div class="justify-content-center d-flex">
-      <a href="/orders/create" class="btn btn-dark">
+  <div class="col-5 align-content-center">
+    <div class="justify-content-center d-flex btn-primary">
+      <a href="/orders/create" class="btn btn-dark shadow">
         <img src="assets/fi_plus.png" alt="" width="20px" class="pb-1 me-1" />
         Tambahkan Data Order
       </a>
@@ -22,7 +22,7 @@
 </div>
 
 <!-- Data Content -->
-<div class="content my-3">
+<div class="content my-3 mx-4">
   <table class="table table-hover table-striped rounded-table">
     <thead class="table-dark">
       <tr class="text-center">
@@ -40,7 +40,7 @@
       <% orders.forEach(order => { %> <% const customer = order.customer%> <% const product =
       order.product %>
       <tr>
-        <th scope="row"><%= order.id %></th>
+        <th scope="row" data-id="<%= order.id %>" id="orderId"><%= order.id %></th>
         <td><%= customer.firstName %> <%= customer.lastName %></td>
         <td><%= customer.email %></td>
         <td><%= order.quantity %></td>
@@ -49,10 +49,15 @@
         <td><%= order.updatedAt.toLocaleString('id-ID') %></td>
         <td>
           <div class="d-flex justify-content-center gap-3">
-            <a class="btn btn-success" href="/orders/edit<%= order.id %>">
+            <a class="btn btn-success" href="/orders/<%= order.id %>/edit">
               <img src="/assets/fi_edit.png" width="18px" />
             </a>
-            <button class="btn btn-warning" id="btnDetail">
+            <button
+              class="btn btn-warning"
+              id="btnDetail"
+              data-bs-toggle="modal"
+              data-bs-target="#detailModal"
+            >
               <i class="fa-regular fa-eye"></i>
             </button>
             <form action="/orders/delete/<%= order.id %>" method="post">
@@ -66,4 +71,54 @@
       <% }) %>
     </tbody>
   </table>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="detailModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="detailModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 fw-bold" id="detailModalLabel">Detail Order ID 1</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover table-bordered">
+          <thead class="text-center table-secondary align-middle">
+            <tr>
+              <th scope="col">Customer</th>
+              <th scope="col">Email</th>
+              <th scope="col">Address</th>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody class="text-center align-middle">
+            <tr>
+              <td>Akbar Maul</td>
+              <td>Markzuksber@mail.com</td>
+              <td>Otto</td>
+              <td>Otto</td>
+              <td>Rp. 30.000</td>
+              <td>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe ea dolorum in fugiat
+                assumenda quasi.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

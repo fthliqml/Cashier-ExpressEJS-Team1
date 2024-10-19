@@ -124,7 +124,7 @@ async function createOrder(req, res) {
 
 async function deleteOrder(req, res) {
   try {
-    const { id } = req.params.id;
+    const id = req.params.id;
     const order = await Order.findByPk(id);
     if (!order) {
       console.error(error);
@@ -138,7 +138,6 @@ async function deleteOrder(req, res) {
 
     await order.destroy();
 
-    req.flash("delete", "Order berhasil dihapus !");
     res.redirect("/orders");
   } catch (error) {
     console.error(error);

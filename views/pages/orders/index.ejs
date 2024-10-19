@@ -3,12 +3,13 @@
   <div class="col-md-7">
     <h1>Halaman Order</h1>
     <p class="justified">
-      Halaman ini adalah bagian dari sistem yang digunakan untuk mengelola transaksi pemesanan
-      produk. Pada halaman ini, pengguna dapat melihat daftar pesanan yang telah dilakukan, termasuk
-      detail seperti nomor pesanan, nama pelanggan, produk yang dipesan, jumlah, total harga, dan
-      tanggal transaksi. Halaman ini membantu memfasilitasi proses pengelolaan dan pemantauan
-      pesanan secara efisien, sehingga memudahkan bisnis dalam menjaga alur kerja yang teratur dan
-      memastikan kepuasan pelanggan.
+      Halaman ini adalah bagian dari sistem yang digunakan untuk mengelola
+      transaksi pemesanan produk. Pada halaman ini, pengguna dapat melihat
+      daftar pesanan yang telah dilakukan, termasuk detail seperti nomor
+      pesanan, nama pelanggan, produk yang dipesan, jumlah, total harga, dan
+      tanggal transaksi. Halaman ini membantu memfasilitasi proses pengelolaan
+      dan pemantauan pesanan secara efisien, sehingga memudahkan bisnis dalam
+      menjaga alur kerja yang teratur dan memastikan kepuasan pelanggan.
     </p>
   </div>
   <div class="col-md-5 align-content-center my-3">
@@ -38,8 +39,8 @@
         </tr>
       </thead>
       <tbody class="bg-light text-dark text-center align-middle">
-        <% orders.forEach(order => { %> <% const customer = order.customer%> <% const product =
-        order.product %>
+        <% orders.forEach(order => { %> <% const customer = order.customer%> <%
+        const product = order.product %>
         <tr>
           <th scope="row"><%= order.id %></th>
           <td><%= customer.firstName %> <%= customer.lastName %></td>
@@ -88,8 +89,15 @@
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5 fw-bold" id="detailModalLabel">Detail Order ID</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5 fw-bold" id="detailModalLabel">
+          Detail Order ID
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="table-responsive">
@@ -109,7 +117,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>

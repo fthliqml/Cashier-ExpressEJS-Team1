@@ -1,7 +1,7 @@
 <div class="container">
-  <h1 class="mb-5">Masukkan Produk</h1>
+  <h1 class="mb-5">Update Produk</h1>
   <form
-    action="/products/create"
+    action="/products/update/<%= product.id %>?_method=PATCH"
     method="POST"
     enctype="application/x-www-form-urlencoded"
   >
@@ -12,7 +12,7 @@
         type="text"
         class="form-control"
         id="name"
-        placeholder=""
+        value="<%= product.name %>"
       />
       <div class="invalid-feedback">
         Please enter a valid email address for shipping updates.
@@ -26,7 +26,7 @@
         type="text"
         class="form-control"
         id="price"
-        placeholder=""
+        value="<%= product.price %>"
       />
       <div class="invalid-feedback">
         Please enter a valid email address for shipping updates.
@@ -40,7 +40,7 @@
         type="text"
         class="form-control"
         id="stock"
-        placeholder=""
+        value="<%= product.stock %>"
       />
       <div class="invalid-feedback">
         Please enter a valid email address for shipping updates.
@@ -51,15 +51,16 @@
       <label for="description" class="form-label">Deskripsi</label>
       <textarea
         name="description"
-        type="text"
         class="form-control"
         id="description"
         rows="3"
-      ></textarea>
+      >
+<%= product.description %></textarea
+      >
     </div>
 
     <button class="w-10 btn btn-secondary btn-lg mt-5" type="submit">
-      Tambah produk
+      Ubah produk
     </button>
   </form>
 </div>

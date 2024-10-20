@@ -84,7 +84,7 @@ async function createPage(req, res) {
       layout: "layouts/main-layout",
       title: "Order",
       styleFile: "orders/create.css",
-      scriptFile: "",
+      scriptFile: "orders/create.js",
       currentPage: "orders",
       customers,
       products,

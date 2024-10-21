@@ -27,6 +27,19 @@ async function showOrderPage(req, res) {
       attributes: ["id", "name", "price"],
     });
 
+    // Get information message if there is flash sending in request
+    let type;
+    let message = null;
+    const deleteMsg = req.flash("delete");
+    const updateMsg = req.flash("update");
+
+    if (deleteMsg.length !== 0 || updateMsg.length !== 0) {
+      // if delete message is empty, then type = success
+      type = deleteMsg.length === 0 ? "success" : "danger";
+      // if delete message is empty, then message = updateMsg
+      message = deleteMsg.length === 0 ? updateMsg : deleteMsg;
+    }
+
     // Rendering file with template engines (ejs)
     res.render("pages/orders", {
       layout: "layouts/main-layout",
@@ -37,6 +50,10 @@ async function showOrderPage(req, res) {
       orders,
       customers,
       products,
+      alert: {
+        type,
+        message,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -119,6 +136,8 @@ async function updateOrder(req, res) {
 
     await order.update(newOrder);
 
+    req.flash("update", "Successfully updated order data !");
+
     res.redirect("/orders");
   } catch (error) {
     console.error(error);
@@ -168,6 +187,7 @@ async function createOrder(req, res) {
 
   try {
     await Order.create(newOrder);
+    req.flash("update", "Successfully created order data !");
     res.redirect("/orders");
   } catch (error) {
     console.error(error);
@@ -192,6 +212,7 @@ async function deleteOrder(req, res) {
     }
 
     await order.destroy();
+    req.flash("delete", "Successfully deleted order data !");
 
     res.redirect("/orders");
   } catch (error) {

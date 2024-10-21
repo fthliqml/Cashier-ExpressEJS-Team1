@@ -15,3 +15,18 @@
   max-height: 470px;
   overflow-y: auto;
 }
+
+#live-alert {
+  top: 10%;
+  left: 10%;
+}
+
+/* Animation */
+.fade-out {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+
+.fade-out.hidden {
+  opacity: 0;
+}

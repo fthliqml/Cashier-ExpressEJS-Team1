@@ -89,7 +89,7 @@ function insertIntoUpdateModal(order, customers, products) {
         </div>
         <div class="mb-3">
             <label for="inputQuantity" class="form-label col-12">Quantity</label>
-            <input type="number" class="text-center w-25" name="quantity" id="inputQuantity" min="0" value="${
+            <input type="number" class="text-center w-25" name="quantity" id="inputQuantity" min="1" max="1000" value="${
               order.quantity
             }" />
           </div>

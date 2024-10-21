@@ -1,12 +1,17 @@
 * {
-    font-family: Poppins;
+  font-family: Poppins;
 }
 
 .justified {
-    text-align: justify;
+  text-align: justify;
 }
 
 .rounded-table {
-    border-radius: 15px;
-    overflow: hidden;
+  border-radius: 15px 0px 0px 15px;
+  overflow: hidden;
+}
+
+.table-container {
+  max-height: 470px;
+  overflow-y: auto;
 }

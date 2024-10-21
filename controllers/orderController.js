@@ -15,7 +15,30 @@ async function showOrderPage(req, res) {
           attributes: ["name", "price"],
         },
       ],
+      order: [["id", "ASC"]],
     });
+
+    // Data for update
+    const customers = await Customer.findAll({
+      attributes: ["id", "firstName", "lastName"],
+    });
+
+    const products = await Product.findAll({
+      attributes: ["id", "name", "price"],
+    });
+
+    // Get information message if there is flash sending in request
+    let type;
+    let message = null;
+    const deleteMsg = req.flash("delete");
+    const updateMsg = req.flash("update");
+
+    if (deleteMsg.length !== 0 || updateMsg.length !== 0) {
+      // if delete message is empty, then type = success
+      type = deleteMsg.length === 0 ? "success" : "danger";
+      // if delete message is empty, then message = updateMsg
+      message = deleteMsg.length === 0 ? updateMsg : deleteMsg;
+    }
 
     // Rendering file with template engines (ejs)
     res.render("pages/orders", {
@@ -25,6 +48,12 @@ async function showOrderPage(req, res) {
       scriptFile: "orders/order.js",
       currentPage: "orders",
       orders,
+      customers,
+      products,
+      alert: {
+        type,
+        message,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -76,6 +105,51 @@ async function getDetailOrder(req, res) {
   }
 }
 
+async function updateOrder(req, res) {
+  const id = req.params.id;
+  const { customer_id, product_id, quantity } = req.body;
+
+  try {
+    const product = await Product.findByPk(product_id, {
+      attributes: ["price"],
+    });
+    const order = await Order.findByPk(id);
+
+    const totalPrice = product.price * quantity;
+
+    const isDataUnchanged =
+      order.customer_id == customer_id &&
+      order.product_id == product_id &&
+      order.quantity == quantity &&
+      order.totalPrice == totalPrice;
+
+    if (isDataUnchanged) {
+      return res.redirect("/orders");
+    }
+
+    const newOrder = {
+      customer_id,
+      product_id,
+      quantity,
+      totalPrice,
+    };
+
+    await order.update(newOrder);
+
+    req.flash("update", "Successfully updated order data !");
+
+    res.redirect("/orders");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: "Failed",
+      message: "Failed to update order",
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
+
 async function createPage(req, res) {
   const customers = await Customer.findAll();
   const products = await Product.findAll();
@@ -84,7 +158,7 @@ async function createPage(req, res) {
       layout: "layouts/main-layout",
       title: "Order",
       styleFile: "orders/create.css",
-      scriptFile: "",
+      scriptFile: "orders/create.js",
       currentPage: "orders",
       customers,
       products,
@@ -113,6 +187,7 @@ async function createOrder(req, res) {
 
   try {
     await Order.create(newOrder);
+    req.flash("update", "Successfully created order data !");
     res.redirect("/orders");
   } catch (error) {
     console.error(error);
@@ -137,6 +212,7 @@ async function deleteOrder(req, res) {
     }
 
     await order.destroy();
+    req.flash("delete", "Successfully deleted order data !");
 
     res.redirect("/orders");
   } catch (error) {
@@ -153,6 +229,7 @@ async function deleteOrder(req, res) {
 module.exports = {
   showOrderPage,
   getDetailOrder,
+  updateOrder,
   createPage,
   createOrder,
   deleteOrder,

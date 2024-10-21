@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Relasi Product -> Order (One-to-Many)
       Product.hasMany(models.Order, { foreignKey: "product_id" });
+      Product.hasMany(models.Review, { foreignKey: "product_id" });
     }
   }
   Product.init(

@@ -16,6 +16,18 @@ async function showReviewPage(req, res) {
         },
       ],
     });
+
+    // GET flash messages
+    let type;
+    let message = null;
+    const deleteMsg = req.flash("delete");
+    const updateMsg = req.flash("update");
+
+    if (deleteMsg.length !== 0 || updateMsg.length !== 0) {
+      type = deleteMsg.length === 0 ? "success" : "danger";
+      message = deleteMsg.length === 0 ? updateMsg : deleteMsg;
+    }
+
     res.render("pages/reviews", {
       layout: "layouts/main-layout",
       title: "Reviews",
@@ -23,6 +35,10 @@ async function showReviewPage(req, res) {
       scriptFile: "reviews.js",
       currentPage: "reviews",
       reviews,
+      alert: {
+        type,
+        message,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -64,6 +80,7 @@ async function getDetailReview(res, req) {
       data: review,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       status: "Failed",
       message: "Failed get review data!",
@@ -157,10 +174,40 @@ async function createReview(req, res) {
   }
 }
 
+async function deleteReview(req, res) {
+  try {
+    const id = req.params.id;
+    const review = await Review.findByPk(id);
+    if (!review) {
+      console.error(error);
+      res.status(500).json({
+        status: "Failed",
+        message: `Failed to get review by id: ${id}`,
+        isSuccess: false,
+        error: error.message,
+      });
+    }
+
+    await review.destroy();
+    req.flash("delete", "Successfully deleted review data!");
+    res.redirect("/reviews");
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: "Failed",
+      message: "Failed to delete review data",
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
+
 module.exports = {
   showReviewPage,
   getDetailReview,
   createReview,
   chooseOrderReviewPage,
   createReviewPage,
+  deleteReview
 };

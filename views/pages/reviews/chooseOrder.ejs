@@ -1,0 +1,35 @@
+<div class="form-body">
+  <div class="row">
+    <div class="form-holder">
+      <div class="form-content">
+        <div class="form-items">
+          <h3>Create New Review</h3>
+          <form
+            class="requires-validation"
+            enctype="application/x-www-form-urlencoded"
+            method="post"
+            action="/reviews/chooseOrder"
+          >
+            <div class="col-md-12">
+              <select id="order" name="order" class="form-select mt-3" required>
+                <option selected disabled value="">Order Name</option>
+                <% orders.forEach(order => { %>
+                <option value="<%= order.id %>"><%= order.id %></option>
+                <% }) %>
+              </select>
+            </div>
+
+            <div class="form-button mt-3 d-flex justify-content-between">
+              <a href="/reviews" class="btn btn btn-outline-secondary">
+                Cancel
+              </a>
+              <button id="submit" type="submit" class="btn btn-primary">
+                Next
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

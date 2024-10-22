@@ -2,14 +2,34 @@ const { Customer } = require("../models");
 
 async function showCustomerPage(req, res) {
   try {
-    const customers = await Customer.findAll({ order: [['firstName', 'ASC']] });
+    const customers = await Customer.findAll({ order: [["id", "ASC"]] });
+
+    // Get flash messages
+    let type = null;
+    let message = null;
+
+    const deleteMsg = req.flash("delete");
+    const updateMsg = req.flash("update");
+
+    if (deleteMsg.length !== 0) {
+      type = "success";
+      message = deleteMsg;
+    } else if (updateMsg.length !== 0) {
+      type = "success";
+      message = updateMsg;
+    }
+
     res.render("pages/customers/index", {
       customers,
       layout: "layouts/main-layout",
       title: "Customers List",
-      styleFile: "customers.css",
+      styleFile: "customers/index.css",
       scriptFile: "customers.js",
       currentPage: "customers",
+      alert: {
+        type,
+        message,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -21,12 +41,13 @@ async function showCustomerPage(req, res) {
     });
   }
 }
+
 async function createCustomerPage(req, res) {
   try {
     res.render("pages/customers/create", {
       layout: "layouts/main-layout",
       title: "Customers Create Page",
-      styleFile: "customers.css",
+      styleFile: "customers/index.css",
       scriptFile: "customers.js",
       currentPage: "customers",
     });
@@ -42,7 +63,6 @@ async function createCustomerPage(req, res) {
 
 async function createCustomer(req, res) {
   try {
-    console.log("Request Body:", req.body);
     const { firstName, lastName, email, address } = req.body;
 
     const newCustomer = await Customer.create({
@@ -51,9 +71,8 @@ async function createCustomer(req, res) {
       email,
       address,
     });
-    console.log("New Customer Created:", newCustomer);
-
-    res.redirect("/customers?message=Customer successfully created!");
+    req.flash("update", "Customer created Successfully!");
+    res.redirect("/customers");
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -62,7 +81,8 @@ async function createCustomer(req, res) {
       isSuccess: false,
       error: error.message,
     });
-    res.redirect("/customers?message=Failed to create customer");
+    req.flash("update", "Failed to created customer");
+    res.redirect("/customers");
   }
 }
 
@@ -82,7 +102,7 @@ async function editCustomerPage(req, res) {
     res.render("pages/customers/edit", {
       layout: "layouts/main-layout",
       title: "Edit Customer Page",
-      styleFile: "customers.css",
+      styleFile: "customers/index.css",
       scriptFile: "customers.js",
       currentPage: "customers",
       customer: customer,
@@ -105,6 +125,7 @@ async function updateCustomer(req, res) {
     const customer = await Customer.findByPk(customerId);
 
     if (!customer) {
+      req.flash("update", "Customer update failed!");
       return res.status(404).json({
         status: "Failed",
         message: "Customer not found",
@@ -119,6 +140,7 @@ async function updateCustomer(req, res) {
       address,
     });
 
+    req.flash("update", "Customer updated successfully!");
     res.redirect("/customers");
   } catch (error) {
     res.status(500).json({
@@ -136,25 +158,19 @@ async function deleteCustomer(req, res) {
     const customer = await Customer.findByPk(customerId);
 
     if (!customer) {
-      return res.status(404).json({
-        status: "Failed",
-        message: "Customer not found",
-        isSuccess: false,
-      });
+      req.flash("delete", "Customer not found");
+      return res.redirect("/customers");
     }
 
     await customer.destroy();
-
+    req.flash("delete", "Customer deleted successfully!");
     res.redirect("/customers");
   } catch (error) {
-    res.status(500).json({
-      status: "Failed",
-      message: "Failed to delete customer",
-      isSuccess: false,
-      error: error.message,
-    });
+    req.flash("error", "Failed to delete customer");
+    res.redirect("/customers");
   }
 }
+
 async function deleteCustomerPage(req, res) {
   try {
     const customerId = req.params.id;
@@ -195,7 +211,7 @@ async function searchCustomerPage(req, res) {
         layout: "layouts/main-layout",
         title: "Customer Not Found",
         customer: null,
-        styleFile: "customers.css",
+        styleFile: "customers/index.css",
         scriptFile: "customers.js",
         currentPage: "customers",
         message: "Customer not found",
@@ -204,7 +220,7 @@ async function searchCustomerPage(req, res) {
 
     res.render("pages/customers/search", {
       layout: "layouts/main-layout",
-      styleFile: "customers.css",
+      styleFile: "customers/index.css",
       scriptFile: "customers.js",
       currentPage: "customers",
       title: "Customer Details",

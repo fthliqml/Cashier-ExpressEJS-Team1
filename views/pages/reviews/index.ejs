@@ -1,0 +1,148 @@
+<div class="mb-5 text-center">
+  <h1 class="mb-3">Halaman Review</h1>
+  <p class="justified">
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+    voluptas soluta dignissimos praesentium, a perspiciatis eius ullam facilis
+    quae quo! <br />
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos, debitis. Lorem
+    ipsum dolor sit amet.
+  </p>
+</div>
+
+<div class="mb-3 ms-4">
+  <a href="/reviews/chooseOrder" class="btn btn-dark shadow">
+    <img src="assets/fi_plus.png" alt="" width="20px" class="pb-1 me-1" />
+    Tambahkan Review
+  </a>
+</div>
+
+<div class="table-container my-3 mx-4">
+  <div class="table-responsive">
+    <table class="table table-hover table-striped rounded-table">
+      <thead class="table-dark">
+        <tr class="text-center">
+          <th scope="col">ID</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Product</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Comment</th>
+          <th scope="col">Create Date</th>
+          <th scope="col">Update Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody class="bg-light text-dark text-center align-middle">
+        <% reviews.map((review)=> { %>
+          <tr>
+            <th scope="row">
+              <%= review.id %>
+            </th>
+            <td>
+              <%= review.customer.firstName %>
+                <%= review.customer.lastName %>
+            </td>
+            <td>
+              <%= review.product.name %>
+            </td>
+            <td>
+              <% for(let i=1; i<=5; i++) { %>
+                <% if (i <=review.rating) { %>
+                  <i class="fa fa-star text-warning"></i>
+                  <% } else { %>
+                    <i class="fa fa-star text-secondary"></i>
+                    <% } %>
+                      <% } %>
+            </td>
+            <td>
+              <%= review.comment %>
+            </td>
+            <td>
+              <%= review.createdAt.toLocaleString('id-ID') %>
+            </td>
+            <td>
+              <%= review.updatedAt.toLocaleString('id-ID') %>
+            </td>
+            <td>
+              <div class="d-flex justify-content-center gap-3">
+                <!-- button for edit data -->
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editReviewModal<%= review.id %>">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+
+                <!-- button for view data -->
+                <button class="btn btn-warning">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+
+                <!-- button for delete data -->
+                <form action="/reviews/delete/<%= review.id %>" method="post">
+                  <button class="btn btn-outline-danger">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Modal for Edit Data -->
+          <div class="modal fade" id="editReviewModal<%= review.id %>" tabindex="-1"
+            aria-labelledby="editReviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="editReviewModalLabel">Edit Review Data</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="/reviews/update/<%= review.id %>" method="post"
+                    enctype="application/x-www-form-urlencoded">
+
+                    <label for="customer" class="form-label">Customer Name</label>
+                    <select class="form-select" name="customer_id" id="customer">
+                      <% customers.map((customer)=> { %>
+                        <option value="<%= customer.id %>" <%=review.customer_id===customer.id ? 'selected' : '' %>>
+                          <%= customer.firstName %>
+                            <%= customer.lastName %>
+                        </option>
+                        <% }) %>
+                    </select>
+
+                    <label for="product" class="form-label">Product Name</label>
+                    <select class="form-select" name="product_id" id="product">
+                      <% products.map((product)=> { %>
+                        <option value="<%= product.id %>" <%=review.product_id===product.id ? 'selected' : '' %>>
+                          <%= product.name %>
+                        </option>
+                        <% }) %>
+                    </select>
+
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="number" class="form-control" name="rating" id="rating" value="<%= reviews.rating %>"
+                      min="1" max="5">
+
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea class="form-control" name="comment" id="comment"><%= reviews.comment %></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<% if (alert.message !=null) { %>
+  <div class="alert alert-<%= alert.type %> alert-dismissible w-75 position-fixed z-3" role="alert" id="live-alert">
+    <div>
+      <%= alert.message[0] %>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <% } %>

@@ -1,0 +1,79 @@
+<div class="container">
+  <h1 class="mb-5">Detail Produk</h1>
+  <% if (product) { %>
+    <div class="col-6 mt-5">
+      <label for="price" class="form-label">ID</label>
+      <table class="table table-bordered table-striped">
+      <tr>      
+        <td><%= product.id %></td>
+      </tr>
+      </table>
+    </div>
+
+    <div class="col-6 mt-3">
+      <label for="name" class="form-label">Product Name</label>
+      <table class="table table-bordered table-striped">
+      <tr>      
+        <td><%= product.name %></td>
+      </tr>
+      </table>
+    </div>
+
+    <div class="col-6 mt-3">
+      <label for="price" class="form-label">Price</label>
+      <table class="table table-bordered table-striped">
+      <tr>      
+        <td><%= product.price %></td>
+      </tr>
+      </table>
+    </div>
+
+    <div class="col-6 mt-3">
+      <label for="stock" class="form-label">Stock</label>
+      <table class="table table-bordered table-striped">
+      <tr>      
+        <td><%= product.stock %></td>
+      </tr>
+      </table>
+    </div>
+
+    <div class="col-6 mt-3">
+      <label for="createdAt" class="form-label">Created At</label>
+      <table class="table table-bordered table-striped">
+      <tr>      
+        <td><%= product.createdAt %></td>
+      </tr>
+      </table>
+    </div>
+
+    <div class="col-6 mt-3">
+      <label for="updatedAt" class="form-label">Update At</label>
+      <table class="table table-bordered table-striped">
+      <tr>      
+        <td><%= product.updatedAt %></td>
+      </tr>
+      </table>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <table class="table table-bordered table-striped">
+      <tr>      
+        <td><%= product.description %></td>
+      </tr>
+      </table>
+    </div>
+
+    <% } else { %>
+        <p class="text-danger text-center">
+            <%= message || "Product not found." %>
+        </p>
+    <% } %>
+
+
+    <div class="card-footer d-flex justify-content-center py-3">
+        <a href="/products" class="btn btn-secondary">Back to Product Page</a>
+    </div>
+  </form>
+</div>
+

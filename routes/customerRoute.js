@@ -12,5 +12,4 @@ router.post("/customers/:id/edit", customerController.updateCustomer);
 router.get("/customers/delete/:id", customerController.deleteCustomerPage);
 router.post("/customers/delete/:id", customerController.deleteCustomer);
 router.get("/customers/:id", customerController.showCustomerDetails);
-
 module.exports = router;

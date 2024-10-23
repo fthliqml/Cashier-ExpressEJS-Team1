@@ -55,3 +55,28 @@
 #### Delete Existing Order
 
 ![Delete order](https://github.com/user-attachments/assets/452b3d21-8b48-4e97-b185-7bbcb23c8a10)
+
+### Customer Page
+
+#### Get All Customer Data
+
+![Screenshot 2024-10-23 210429](https://github.com/user-attachments/assets/a22e2686-561f-4961-a164-af30a618b6bf)
+
+#### Get Customer Detail by Id
+
+![CustomersListand1morepage-Profile1-MicrosoftEdge2024-10-2321-27-46-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/81f6e013-7831-4e4e-94bb-2027117eba89)
+
+#### Update Customer
+
+![CustomersListand1morepage-Profile1-MicrosoftEdge2024-10-2321-34-33-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/1cf3e358-4551-4771-962d-fd32b363122d)
+
+
+#### Create New Customer
+
+![CustomersListand1morepage-Profile1-MicrosoftEdge2024-10-2321-41-17-ezgif com-video-to-gif-converter (1)](https://github.com/user-attachments/assets/1e562c83-45a9-4eb6-bf3d-ef171ae804aa)
+
+
+#### Delete Existing Customer
+
+![CustomersListand1morepage-Profile1-MicrosoftEdge2024-10-2321-45-15-ezgif com-video-to-gif-converter (1)](https://github.com/user-attachments/assets/e328f055-d77c-4aab-b9bb-0269862527c7)
+

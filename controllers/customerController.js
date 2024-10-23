@@ -232,6 +232,42 @@ async function searchCustomerPage(req, res) {
     res.status(500).send("Internal Server Error");
   }
 }
+async function showCustomerDetails(req, res) {
+  try {
+    const customerId = req.params.id;
+    const customer = await Customer.findByPk(customerId);
+
+    if (!customer) {
+      return res.status(404).render("pages/customers/details", {
+        layout: "layouts/main-layout",
+        title: "Customer Not Found",
+        customer: null,
+        styleFile: "customers/index.css",
+        scriptFile: "customers.js",
+        currentPage: "customers",
+        message: "Customer not found",
+      });
+    }
+
+    res.render("pages/customers/details", {
+      layout: "layouts/main-layout",
+      title: "Customer Details",
+      customer,
+      styleFile: "customers/index.css",
+      scriptFile: "customers.js",
+      currentPage: "customers",
+      message: null,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: "Failed",
+      message: "Failed to show customer details",
+      isSuccess: false,
+      error: error.message,
+    });
+  }
+}
 
 module.exports = {
   showCustomerPage,
@@ -242,4 +278,5 @@ module.exports = {
   deleteCustomer,
   deleteCustomerPage,
   searchCustomerPage,
+  showCustomerDetails,
 };

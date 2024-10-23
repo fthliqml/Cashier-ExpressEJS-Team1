@@ -1,12 +1,12 @@
 <div class="container">
-  <h1 class="mb-5">Masukkan Produk</h1>
+  <h1 class="mb-5">Add New Product</h1>
   <form
     action="/products/create"
     method="POST"
     enctype="application/x-www-form-urlencoded"
   >
     <div class="col-6 mt-5">
-      <label for="name" class="form-label">Nama Produk</label>
+      <label for="name" class="form-label">Product Name</label>
       <input
         name="name"
         type="text"
@@ -20,7 +20,7 @@
     </div>
 
     <div class="col-6 mt-3">
-      <label for="price" class="form-label">Harga Produk</label>
+      <label for="price" class="form-label">Price</label>
       <input
         name="price"
         type="text"
@@ -47,8 +47,8 @@
       </div>
     </div>
 
-    <div class="mb-3">
-      <label for="description" class="form-label">Deskripsi</label>
+    <div class="desc mt-3 mb-3">
+      <label for="description" class="form-label">Description</label>
       <textarea
         name="description"
         type="text"
@@ -59,7 +59,7 @@
     </div>
 
     <button class="w-10 btn btn-secondary btn-lg mt-5" type="submit">
-      Tambah produk
+      Add Product
     </button>
   </form>
 </div>

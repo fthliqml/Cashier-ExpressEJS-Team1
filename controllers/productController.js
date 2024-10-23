@@ -36,7 +36,7 @@ async function createProductPage(req, res) {
   try {
     res.render("pages/products/create", {
       layout: "layouts/main-layout",
-      title: "Add Product",
+      title: "Add New Product",
       styleFile: "products.css",
       scriptFile: "products.js",
       currentPage: "products",
@@ -75,7 +75,7 @@ async function updateProductPage(req, res) {
     res.render("pages/products/update", {
       product: product,
       layout: "layouts/main-layout",
-      title: "Add Product",
+      title: "Update Product",
       styleFile: "products.css",
       scriptFile: "products.js",
       currentPage: "products",

@@ -1,0 +1,85 @@
+<div class="form-body">
+  <div class="row">
+    <div class="form-holder">
+      <div class="form-content">
+        <div class="form-items">
+          <h3>Create New Review</h3>
+          <form
+            class="requires-validation"
+            enctype="application/x-www-form-urlencoded"
+            method="post"
+            action="/reviews/create"
+          >
+            <div class="col-md-12">
+              <input
+                type="text"
+                id="customer"
+                name="customer"
+                class="form-control mt-3"
+                value="<%= customer.firstName %> <%= customer.lastName %>"
+                readonly
+              />
+              <input
+                type="hidden"
+                id="customer"
+                name="customerId"
+                value="<%= order.customer_id %>"
+              />
+            </div>
+
+            <div class="col-md-12">
+              <input
+                type="text"
+                name="product"
+                class="form-control mt-3"
+                id="product"
+                value="<%= product.name %>"
+                data-price="<%= product.price %>"
+                readonly
+              />
+              <input
+                type="hidden"
+                id="product"
+                name="productId"
+                value="<%= order.product_id %>"
+              />
+            </div>
+
+            <div class="col-md-12 mt-3">
+              <input
+                id="rating"
+                class="form-control"
+                type="number"
+                min="1"
+                max="5"
+                name="rating"
+                placeholder="rating"
+                required
+              />
+            </div>
+
+            <div class="col-md-12 mt-3">
+              <input
+                id="comment"
+                class="form-control"
+                type="text"
+                name="comment"
+                placeholder="comment"
+                required
+              />
+            </div>
+
+            <div class="form-button mt-3 d-flex justify-content-between">
+              <a href="/reviews" class="btn btn btn-outline-secondary">
+                Cancel
+              </a>
+              <button id="submit" type="submit" class="btn btn-primary">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

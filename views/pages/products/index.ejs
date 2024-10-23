@@ -11,10 +11,35 @@
   </div>
   <div class="col-4 align-content-center">
     <div class="justify-content-center d-flex">
-      <a href="" class="btn btn-dark">
+      <a href="/products/create" class="btn btn-dark">
         <img src="assets/fi_plus.png" alt="" width="20px" class="pb-1 me-1" />
         Tambahkan Data Product
       </a>
+    </div>
+
+    <div
+      class="d-flex justify-content-between align-items-center mb-4 ms-5 ps-4"
+    >
+      <form
+        class="d-flex align-items-center"
+        action="/products/search"
+        method="get"
+      >
+        <button
+          type="submit"
+          style="background-color: black; border: none"
+          class="btn btn-primary mt-3 py-2 my-2 mx-2"
+        >
+          Search
+        </button>
+        <input
+          type="text"
+          class="form-control mr-2 ml-2 mt-2"
+          name="id"
+          placeholder="Enter ID"
+          required
+        />
+      </form>
     </div>
   </div>
 </div>
@@ -27,7 +52,7 @@
         <th>Name</th>
         <th>Price</th>
         <th>Stock</th>
-        <th>Description</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -37,7 +62,37 @@
         <td><%= product.name %></td>
         <td><%= product.price %></td>
         <td><%= product.stock %></td>
-        <td><%= product.description %></td>
+        <td>
+          <div class="d-flex justify-content-center gap-2">
+            <a
+              class="btn btn-success"
+              href="/products/update/<%= product.id %>"
+            >
+              <img src="/assets/fi_edit.png" alt="Edit" width="18px" />
+            </a>
+
+            <form action="/products/search" method="get">
+              <input type="hidden" name="id" value="<%= product.id %>" />
+              <button class="btn btn-warning" id="btnDetail">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </form>
+
+            <form
+              action="/products/delete/<%= product.id %>"
+              method="post"
+              onsubmit="return confirm('Are you sure you want to delete this Product?')"
+            >
+              <button
+                class="btn btn-outline-danger"
+                id="btnDelete"
+                type="submit"
+              >
+                <img src="/assets/fi_delete.png" alt="Delete" width="18px" />
+              </button>
+            </form>
+          </div>
+        </td>
       </tr>
       <% }) %>
     </tbody>

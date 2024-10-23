@@ -2,12 +2,10 @@ require("dotenv").config();
 const express = require("express");
 
 const configureMiddleware = require("./config/middleware");
-<<<<<<< HEAD
+
 const customerRoutes = require("./routes/customerRoute");
 const productRoutes = require("./routes/productRoute");
 const { productController } = require("./controllers");
-=======
->>>>>>> 01693c760d05bcf0ba78c2595598ff4f541f93ee
 
 const app = express();
 
@@ -32,13 +30,10 @@ app.get("/", (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 //ROUTER
 app.use("/customers", customerRoutes);
 app.use("/products", productRoutes);
 
-=======
->>>>>>> 01693c760d05bcf0ba78c2595598ff4f541f93ee
 const PORT = process.env.PORT_NUMBER;
 app.listen(PORT, () => {
   console.log(`App running on http://localhost:${PORT}`);

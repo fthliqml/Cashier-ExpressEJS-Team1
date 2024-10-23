@@ -1,0 +1,13 @@
+* {
+  font-family: Poppins;
+}
+
+.table-container {
+  max-height: 470px;
+  overflow-y: auto;
+}
+
+#live-alert {
+  top: 10%;
+  left: 10%;
+}

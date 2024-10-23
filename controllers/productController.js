@@ -5,6 +5,22 @@ async function showProductPage(req, res) {
     // Rendering file with template engines (ejs)
     const products = await Product.findAll();
     console.log(products);
+
+    // Get flash messages
+    let type = null;
+    let message = null;
+
+    const deleteMsg = req.flash("delete");
+    const updateMsg = req.flash("update");
+
+    if (deleteMsg.length !== 0) {
+      type = "success";
+      message = deleteMsg;
+    } else if (updateMsg.length !== 0) {
+      type = "success";
+      message = updateMsg;
+    }
+
     res.render("pages/products", {
       products,
       layout: "layouts/main-layout",
@@ -12,6 +28,10 @@ async function showProductPage(req, res) {
       styleFile: "products.css",
       scriptFile: "products.js",
       currentPage: "products",
+      alert: {
+        type,
+        message,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -58,9 +78,11 @@ async function createProduct(req, res) {
   const { name, price, stock, description } = req.body;
   try {
     await Product.create({ name, price, stock, description });
+    req.flash("update", "Product created Successfully!");
     res.redirect("/products");
   } catch (error) {
     console.error(error.message);
+    req.flash("update", "Failed to created Product");
     res.redirect("/products/create");
   }
 }
@@ -95,9 +117,11 @@ async function updateProduct(req, res) {
         where: { id: product.id },
       }
     );
+    req.flash("update", "Product updated successfully!");
     res.redirect("/products");
   } catch (error) {
     console.error(error.message);
+    req.flash("update", "Product update failed!");
     res.redirect(`/products/update/${product.id}`);
   }
 }

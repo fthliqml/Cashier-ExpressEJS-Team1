@@ -19,8 +19,8 @@
 
 **Customer Page :**
 
-1. **Rizal Firmansyah**
-2. **Ferdi Firdaus Ega Pratama**
+1. **Rizal Firmansyah** - Get all customers, Create new customers, dan update customers
+2. **Ferdi Firdaus Ega Pratama** - Get detail customers, Delete customers, get customers by id
 
 **Order Page :**
 

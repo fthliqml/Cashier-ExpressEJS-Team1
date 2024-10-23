@@ -48,10 +48,10 @@
               <% for(let i=1; i<=5; i++) { %>
                 <% if (i <=review.rating) { %>
                   <i class="fa fa-star text-warning"></i>
-                <% } else { %>
-                  <i class="fa fa-star text-secondary"></i>
-                <% } %>
-              <% } %>
+                  <% } else { %>
+                    <i class="fa fa-star text-secondary"></i>
+                    <% } %>
+                      <% } %>
             </td>
             <td>
               <%= review.comment %>
@@ -65,7 +65,7 @@
             <td>
               <div class="d-flex justify-content-center gap-3">
                 <!-- button for edit data -->
-                <button class="btn btn-success">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editReviewModal<%= review.id %>">
                   <i class="fa-solid fa-pen-to-square"></i>
                 </button>
 
@@ -83,11 +83,60 @@
               </div>
             </td>
           </tr>
+
+          <!-- Modal for Edit Data -->
+          <div class="modal fade" id="editReviewModal<%= review.id %>" tabindex="-1"
+            aria-labelledby="editReviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="editReviewModalLabel">Edit Review Data</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="/reviews/update/<%= review.id %>" method="post"
+                    enctype="application/x-www-form-urlencoded">
+
+                    <label for="customer" class="form-label">Customer Name</label>
+                    <select class="form-select" name="customer_id" id="customer">
+                      <% customers.map((customer)=> { %>
+                        <option value="<%= customer.id %>" <%=review.customer_id===customer.id ? 'selected' : '' %>>
+                          <%= customer.firstName %>
+                            <%= customer.lastName %>
+                        </option>
+                        <% }) %>
+                    </select>
+
+                    <label for="product" class="form-label">Product Name</label>
+                    <select class="form-select" name="product_id" id="product">
+                      <% products.map((product)=> { %>
+                        <option value="<%= product.id %>" <%=review.product_id===product.id ? 'selected' : '' %>>
+                          <%= product.name %>
+                        </option>
+                        <% }) %>
+                    </select>
+
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="number" class="form-control" name="rating" id="rating" value="<%= reviews.rating %>"
+                      min="1" max="5">
+
+                    <label for="comment" class="form-label">Comment</label>
+                    <textarea class="form-control" name="comment" id="comment"><%= reviews.comment %></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
           <% }) %>
       </tbody>
     </table>
   </div>
 </div>
+
 
 <% if (alert.message !=null) { %>
   <div class="alert alert-<%= alert.type %> alert-dismissible w-75 position-fixed z-3" role="alert" id="live-alert">

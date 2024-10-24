@@ -7,12 +7,10 @@ async function showReviewPage(req, res) {
         {
           model: Customer,
           as: "customer",
-          attributes: ["firstName", "lastName"],
         },
         {
           model: Product,
           as: "product",
-          attributes: ["name"],
         },
       ],
     });
@@ -69,12 +67,10 @@ async function getDetailReview(res, req) {
         {
           model: Customer,
           as: "customer",
-          attributes: ["firstName", "lastName", "email", "address"],
         },
         {
           model: Product,
           as: "product",
-          attributes: ["name", "price", "description"],
         },
       ],
     });

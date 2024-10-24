@@ -5,16 +5,16 @@
 />
 
 <div class="container mt-5">
-  <h2 class="mb-4 text-center">Delete Customer</h2>
+  <h2 class="mb-4 text-center">Delete Product</h2>
   <p class="text-center">
-    Are you sure you want to delete customer
-    <strong> <%= customer.firstName %> <%= customer.lastName %> </strong>?
+    Are you sure you want to delete product
+    <strong> <%= product.firstName %> <%= product.lastName %> </strong>?
   </p>
   <div class="d-flex justify-content-center">
-    <form action="/customers/delete/<%= customer.id %>" method="post">
+    <form action="/products/delete/<%= product.id %>" method="post">
       <button type="submit" class="btn btn-danger">Yes, Delete</button>
     </form>
-    <a href="/customers" class="btn btn-secondary ml-2">Cancel</a>
+    <a href="/products" class="btn btn-secondary ml-2">Cancel</a>
   </div>
 </div>
 
